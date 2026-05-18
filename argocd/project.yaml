@@ -1,0 +1,19 @@
+# argocd/project.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: gitops-project
+  namespace: argocd
+spec:
+  description: "gitops-app 프로젝트"
+  sourceRepos:
+    - "https://github.com/zionn1002/gitops-config"
+  destinations:
+    - server: "https://kubernetes.default.svc"
+      namespace: "gitops-app-*"
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
