@@ -15,7 +15,7 @@ labels:
 images:
 - name: gitops-app
   newName: zionn1002/gitops-app
-  newTag: sha-b9ccd4c
+  newTag: sha-b9a0400
 
 replicas:
 - count: 1
