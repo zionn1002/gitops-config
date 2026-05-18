@@ -14,8 +14,8 @@ labels:
     env: dev
 images:
 - name: gitops-app
-  newName: zionn1002/gitops-app
-  newTag: sha-b9a0400
+  newName: dockerlecture/gitops-app
+  newTag: sha-2e85427
 
 replicas:
 - count: 1
