@@ -17,7 +17,7 @@ spec:
           image: ops-app2
           ports:
             - name: http
-              containerPort: 8081
+              containerPort: 80
           resources:
             requests:
               cpu: "100m"
