@@ -8,8 +8,6 @@ namespace: ops-app2-dev
 
 images:
 - name: ops-app2
-  newName: zionn1002/ops-app2
-  newTag: sha-f415ff9
 
 patches:
 - patch: |-
