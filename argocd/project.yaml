@@ -10,7 +10,9 @@ spec:
     - "https://github.com/zionn1002/gitops-config"
   destinations:
     - server: "https://kubernetes.default.svc"
-      namespace: "gitops-app-*"
+      namespace: "ops-app1-*"
+    - server: "https://kubernetes.default.svc"
+      namespace: "ops-app2-*"
   clusterResourceWhitelist:
     - group: ""
       kind: Namespace

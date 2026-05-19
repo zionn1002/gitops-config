@@ -1,29 +1,45 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: gitops-apps
+  name: ops-platform
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
-    - list:
-        elements:
-          - env: dev
-          - env: prod
+    - matrix:
+        generators:
+          - list:
+              elements:
+                - app: ops-app1
+                  port: "8080"
+                - app: ops-app2
+                  port: "8081"
+          - list:
+              elements:
+                - env: dev
+                  replicas: "1"
+                - env: staging
+                  replicas: "2"
+                - env: prod
+                  replicas: "3"
   template:
     metadata:
-      name: "gitops-app-{{env}}"
+      name: "{{.app}}-{{.env}}"
+      namespace: argocd
     spec:
       project: gitops-project
       source:
         repoURL: https://github.com/zionn1002/gitops-config
         targetRevision: main
-        path: apps/gitops-app/overlays/{{env}}
+        path: "apps/{{.app}}/overlays/{{.env}}"
       destination:
         server: https://kubernetes.default.svc
-        namespace: gitops-app-{{env}}
+        namespace: "{{.app}}-{{.env}}"
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+          - ServerSideApply=true
