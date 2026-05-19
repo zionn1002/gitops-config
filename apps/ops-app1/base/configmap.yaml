@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ops-app1-config
+data:
+  PROFILE: "default"
+  OPS_APP2_URL: "http://ops-app2:8081"

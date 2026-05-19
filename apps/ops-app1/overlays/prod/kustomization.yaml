@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+namespace: ops-app1-prod
+
+images:
+  - name: ops-app1
+    newName: nginx
+    newTag: "1.27"
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 3
+    target:
+      kind: Deployment
+      name: ops-app1
+
+configMapGenerator:
+  - name: ops-app1-config
+    behavior: merge
+    literals:
+      - PROFILE=prod
+      - OPS_APP2_URL=http://ops-app2.ops-app2-prod.svc.cluster.local:8081

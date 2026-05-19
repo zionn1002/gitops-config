@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+namespace: ops-app1-dev
+
+images:
+  - name: ops-app1
+    newName: nginx # 단계 검증용. [devops] 02에서 Spring Boot로 교체
+    newTag: "1.27-alpine"
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: Deployment
+      name: ops-app1
+
+configMapGenerator:
+  - name: ops-app1-config
+    behavior: merge
+    literals:
+      - PROFILE=dev
+      - OPS_APP2_URL=http://ops-app2.ops-app2-dev.svc.cluster.local:8081
