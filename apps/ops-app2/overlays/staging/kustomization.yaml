@@ -21,7 +21,7 @@ patches:
       name: ops-app2
 
 configMapGenerator:
-  - name: ops-app1-config
+  - name: ops-app2-config
     behavior: merge
     literals:
       - PROFILE=staging
