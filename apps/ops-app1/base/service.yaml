@@ -7,6 +7,6 @@ spec:
     app.kubernetes.io/name: ops-app1
   ports:
     - port: 8080
-      targetPort: 80
+      targetPort: 8080
       name: http
   type: ClusterIP
