@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - ../../base
   - external-secret.yaml
-  - gateway-route.yaml # Gateway API 매니페스트 (ops-app2만)
 
 namespace: ops-app2-eks-dev
 
