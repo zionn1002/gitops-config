@@ -11,7 +11,7 @@ namespace: ops-app1-eks-dev
 images:
 - name: ops-app1
   newName: 984126995517.dkr.ecr.ap-northeast-2.amazonaws.com/ops-app1
-  newTag: sha-47d93d6
+  newTag: sha-f37a429
 
 patches:
 - patch: |-
