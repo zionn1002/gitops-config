@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: ops-app1
   namespace: ops-app1-eks-dev
+  labels:
+    app.kubernetes.io/name: ops-app1
 spec:
   selector:
     app.kubernetes.io/name: ops-app1
