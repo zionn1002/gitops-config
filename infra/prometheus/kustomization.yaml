@@ -1,0 +1,7 @@
+# infra/prometheus/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - servicemonitor-ops-app1.yaml
+  - servicemonitor-ops-app2.yaml

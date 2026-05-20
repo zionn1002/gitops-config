@@ -1,0 +1,22 @@
+# argocd/application-monitoring.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring-servicemonitors
+  namespace: argocd
+spec:
+  project: gitops-project
+  source:
+    repoURL: https://github.com/zionn1002/gitops-config
+    targetRevision: main
+    path: infra/prometheus
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring # 설치한 네임스페이스
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
