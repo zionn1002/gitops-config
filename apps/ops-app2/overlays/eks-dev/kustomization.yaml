@@ -10,7 +10,7 @@ namespace: ops-app2-eks-dev
 images:
 - name: ops-app2
   newName: 984126995517.dkr.ecr.ap-northeast-2.amazonaws.com/ops-app2
-  newTag: sha-cdaaca5
+  newTag: sha-308801b
 
 patches:
 - patch: |-
