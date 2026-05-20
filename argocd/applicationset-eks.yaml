@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ops-platform-eks
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - matrix:
+        generators:
+          - list:
+              elements:
+                - app: ops-app1
+                - app: ops-app2
+          - list:
+              elements:
+                - env: eks-dev
+  template:
+    metadata:
+      name: "{{.app}}-{{.env}}"
+      namespace: argocd
+    spec:
+      project: gitops-project
+      source:
+        repoURL: https://github.com/zionn1002/gitops-config
+        targetRevision: main
+        path: "apps/{{.app}}/overlays/{{.env}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{.app}}-{{.env}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
